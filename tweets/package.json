@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "csv-parse": "^2.4.0",
+    "jest": "^22.4.3",
     "ramda": "^0.25.0",
     "standard": "^11.0.1"
   }
