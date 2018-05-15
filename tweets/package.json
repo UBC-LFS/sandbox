@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "csv-parse": "^2.4.0",
     "ramda": "^0.25.0"
   }
 }
