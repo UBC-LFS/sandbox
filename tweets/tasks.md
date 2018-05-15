@@ -1,4 +1,4 @@
-- [ ] Average length of tweet
+- [X] Average length of tweet
 - [ ] Most frequent day of week he tweets
 - [ ] Most frequent hour of day he tweets
 - [ ] Number of mentions of "Clinton"

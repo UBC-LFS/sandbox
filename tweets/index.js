@@ -21,7 +21,13 @@ const timeOfDay = csv => {
 
 const tweetTextContent = csv => {
   const tweets = csv.map(csv => csv.Tweet_Text)
-}  
+  const lengthOfTweets = tweets.map(tweet => tweet.length)
+  let totalAverage = 0
+  for (let i = 0; i < lengthOfTweets.length; i++) {
+    totalAverage += lengthOfTweets[i]
+  }
+  return Math.round(totalAverage / lengthOfTweets.length)
+}
 
 const readCSV = async () => {
   const file = await fsReadFile(path.join(__dirname, INPUTFILENAME))
