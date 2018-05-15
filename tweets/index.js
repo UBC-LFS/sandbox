@@ -33,11 +33,16 @@ const mentions = (input, arr) => arr
   .map(csv => csv.Tweet_Text)
   .filter(tweets => tweets.includes(input))
 
+const countExclamations = arr => mentions('!', arr)
+  .map(tweet => tweet.match(/!/g))
+  .map(tweet => tweet.length)
+
 const readCSV = async () => {
   const file = await fsReadFile(path.join(__dirname, INPUTFILENAME))
   csvParse(file)
   //  .then(csv => tweetAvgLength(csv))
-    .then(csv => mentions('Clinton', csv))
+  //  .then(csv => mentions('Clinton', csv))
+    .then(csv => countExclamations(csv))
     .then(x => console.log(x))
 }
 

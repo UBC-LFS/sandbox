@@ -2,4 +2,4 @@
 - [ ] Most frequent day of week he tweets
 - [ ] Most frequent hour of day he tweets
 - [X] Number of mentions of "Clinton"
-- [ ] Number of exclamation marks 
+- [X] Number of exclamation marks 
