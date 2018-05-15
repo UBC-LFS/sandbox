@@ -12,17 +12,21 @@ const INPUTFILENAME = 'trumptweets.csv'
 const stream = fs.createWriteStream(path.join(__dirname, INPUTFILENAME), { flags: 'a' })
 
 const dateOfWeek = csv => {
-  
+
 }
 
 const timeOfDay = csv => {
 
 }
 
+const tweetTextContent = csv => {
+  const tweets = csv.map(csv => csv.Tweet_Text)
+}  
+
 const readCSV = async () => {
   const file = await fsReadFile(path.join(__dirname, INPUTFILENAME))
   csvParse(file)
-    .then(csv => dateOfWeek(csv))
+    .then(csv => tweetTextContent(csv))
     .then(x => console.log(x))
 }
 
