@@ -1,5 +1,8 @@
 - [X] Average length of tweet
+- [ ] Shortest tweet by length
 - [ ] Most frequent day of week he tweets
 - [ ] Most frequent hour of day he tweets
 - [X] Number of mentions of "Clinton"
 - [X] Number of exclamation marks 
+- [ ] Tweet with most "!"
+- [ ] Spelling mistakes
