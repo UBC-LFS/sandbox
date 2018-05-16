@@ -40,7 +40,7 @@ const mentions = (input, csv) => csv
   .filter(tweets => tweets.includes(input))
 
 // Counts the number of inputs in each tweet
-const countInputs = (input, csv) => mentions(input, csv)
+const countInputs = (input, csv) => csv.map(tweet => tweet.Tweet_Text)
   .map(tweet => tweet.split(''))
   .map(csv => csv.filter(tweet => tweet.includes(input)))
   .map(csv => csv.length)
