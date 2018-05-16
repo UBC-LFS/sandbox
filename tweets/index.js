@@ -20,6 +20,7 @@ const dateOfWeek = csv => {
 const timeOfDay = csv => {
 }
 
+// Gives the average tweet length
 const tweetAvgLength = csv =>
   Math.round(calculateAvg(csv.map(csv => csv.Tweet_Text.length)))
 
@@ -29,10 +30,12 @@ const tweetAvgLength = csv =>
 //     .filter(tweets => tweets.includes(input))
 // }
 
+// Looks for the tweets containing the string input
 const mentions = (input, arr) => arr
   .map(csv => csv.Tweet_Text)
   .filter(tweets => tweets.includes(input))
 
+// Counts the number of exclamations in each tweet
 const countExclamations = arr => mentions('!', arr)
   .map(tweet => tweet.match(/!/g))
   .map(tweet => tweet.length)
@@ -42,7 +45,7 @@ const readCSV = async () => {
   csvParse(file)
   //  .then(csv => tweetAvgLength(csv))
   //  .then(csv => mentions('Clinton', csv))
-    .then(csv => countExclamations(csv))
+  //  .then(csv => countExclamations(csv))
     .then(x => console.log(x))
 }
 
