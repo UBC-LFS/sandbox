@@ -24,6 +24,9 @@ const timeOfDay = csv => {
 const tweetAvgLength = csv =>
   Math.round(calculateAvg(csv.map(csv => csv.Tweet_Text.length)))
 
+// Finds the shortest tweet by length
+const shortestTweet = csv => csv.map(csv => csv.Tweet_Text)[csv.map(csv => csv.Tweet_Text.length).reduce((acc, cur, index, arr) => cur < arr[acc] ? index : acc)]
+
 // function mentions (input, arr) {
 //   return arr
 //     .map(csv => csv.Tweet_Text)
@@ -46,6 +49,7 @@ const readCSV = async () => {
   //  .then(csv => tweetAvgLength(csv))
   //  .then(csv => mentions('Clinton', csv))
   //  .then(csv => countExclamations(csv))
+    .then(csv => shortestTweet(csv))
     .then(x => console.log(x))
 }
 
