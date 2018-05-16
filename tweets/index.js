@@ -55,8 +55,8 @@ const readCSV = async () => {
   //  .then(csv => tweetAvgLength(csv))
   //  .then(csv => shortestTweet(csv))
   //  .then(csv => mentions('Clinton', csv))
-    .then(csv => countInputs('!', csv))
-  //  .then(csv => mostExclaimTweet(csv))
+  //  .then(csv => countInputs('!', csv))
+    .then(csv => mostExclaimTweet(csv))
   //  .then(csv => csv.map(tweet => tweet.Tweet_Text))
     .then(x => console.log(x))
 }

@@ -4,5 +4,5 @@
 - [ ] Most frequent hour of day he tweets
 - [X] Number of mentions of "Clinton"
 - [X] Number of exclamation marks 
-- [ ] Tweet with most "!"
+- [X] Tweet with most "!"
 - [ ] Spelling mistakes
