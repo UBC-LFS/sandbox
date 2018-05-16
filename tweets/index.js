@@ -25,7 +25,8 @@ const tweetAvgLength = csv =>
   Math.round(calculateAvg(csv.map(csv => csv.Tweet_Text.length)))
 
 // Finds the shortest tweet by length
-const shortestTweet = csv => csv.map(csv => csv.Tweet_Text)[csv.map(csv => csv.Tweet_Text.length).reduce((acc, cur, index, arr) => cur < arr[acc] ? index : acc)]
+const shortestTweet = csv =>
+  csv.map(csv => csv.Tweet_Text)[csv.map(csv => csv.Tweet_Text.length).reduce((acc, cur, index, arr) => cur < arr[acc] ? index : acc)]
 
 // function mentions (input, arr) {
 //   return arr
@@ -34,22 +35,29 @@ const shortestTweet = csv => csv.map(csv => csv.Tweet_Text)[csv.map(csv => csv.T
 // }
 
 // Looks for the tweets containing the string input
-const mentions = (input, arr) => arr
+const mentions = (input, csv) => csv
   .map(csv => csv.Tweet_Text)
   .filter(tweets => tweets.includes(input))
 
-// Counts the number of exclamations in each tweet
-const countExclamations = arr => mentions('!', arr)
-  .map(tweet => tweet.match(/!/g))
-  .map(tweet => tweet.length)
+// Counts the number of inputs in each tweet
+const countInputs = (input, csv) => mentions(input, csv)
+  .map(tweet => tweet.split(''))
+  .map(csv => csv.filter(tweet => tweet.includes(input)))
+  .map(csv => csv.length)
+
+// Find tweet with most exclamations (still in work)
+const mostExclaimTweet = csv =>
+  csv.map(csv => csv.Tweet_Text)[countInputs('!', csv).reduce((acc, cur, index, arr) => cur > arr[acc] ? index : acc, 0)]
 
 const readCSV = async () => {
   const file = await fsReadFile(path.join(__dirname, INPUTFILENAME))
   csvParse(file)
   //  .then(csv => tweetAvgLength(csv))
+  //  .then(csv => shortestTweet(csv))
   //  .then(csv => mentions('Clinton', csv))
-  //  .then(csv => countExclamations(csv))
-    .then(csv => shortestTweet(csv))
+    .then(csv => countInputs('!', csv))
+  //  .then(csv => mostExclaimTweet(csv))
+  //  .then(csv => csv.map(tweet => tweet.Tweet_Text))
     .then(x => console.log(x))
 }
 
