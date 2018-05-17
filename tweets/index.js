@@ -15,8 +15,26 @@ const INPUTFILENAME = 'trumptweets.csv'
 
 const stream = fs.createWriteStream(path.join(__dirname, INPUTFILENAME), { flags: 'a' })
 
-const dateOfWeek = csv => {
-}
+// Gives the day of week that Trump tweets the most
+const dateOfWeek = csv =>
+  csv.map(tweet => tweet.Date)
+    .map(csv => moment(csv, 'YY-MM-DD').format('dddd'))
+    .reduce((acc, cur) => {
+      const index = acc.findIndex(weekDayObj => weekDayObj.weekDay === cur)
+      if (index > -1) {
+        acc[index].count++
+      } else {
+        acc.push({
+          weekDay: cur,
+          count: 1
+        })
+      }
+      return acc
+    }, [])
+    .reduce((acc, cur) => {
+      if (acc.count < cur.count) acc = cur
+      return acc
+    })
 
 const timeOfDay = csv => {
 }
@@ -55,9 +73,10 @@ const readCSV = async () => {
   csvParse(file)
   //  .then(csv => tweetAvgLength(csv))
   //  .then(csv => shortestTweet(csv))
+    .then(csv => dateOfWeek(csv))
   //  .then(csv => mentions('Clinton', csv))
   //  .then(csv => countInputs('!', csv))
-    .then(csv => mostExclaimTweet(csv))
+  //  .then(csv => mostExclaimTweet(csv))
     .then(x => console.log(x))
 }
 
