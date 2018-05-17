@@ -5,6 +5,8 @@ const {
   fsWriteFile,
   csvParse
 } = require('./util/promises')
+const moment = require('moment')
+const m = moment()
 
 const { calculateAvg } = require('./util/calculate')
 
@@ -51,13 +53,13 @@ const mostExclaimTweet = csv =>
 
 const readCSV = async () => {
   const file = await fsReadFile(path.join(__dirname, INPUTFILENAME))
+  console.log(m)
   csvParse(file)
   //  .then(csv => tweetAvgLength(csv))
   //  .then(csv => shortestTweet(csv))
   //  .then(csv => mentions('Clinton', csv))
   //  .then(csv => countInputs('!', csv))
     .then(csv => mostExclaimTweet(csv))
-  //  .then(csv => csv.map(tweet => tweet.Tweet_Text))
     .then(x => console.log(x))
 }
 
