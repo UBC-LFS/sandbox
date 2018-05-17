@@ -5,4 +5,4 @@
 - [X] Number of mentions of "Clinton"
 - [X] Number of exclamation marks 
 - [X] Tweet with most "!"
-- [ ] Spelling mistakes
+- [X] Spelling mistakes

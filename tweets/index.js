@@ -6,6 +6,8 @@ const {
   csvParse
 } = require('./util/promises')
 const moment = require('moment')
+const spell = require('spell-checker-js')
+spell.load('en')
 
 const { calculateAvg } = require('./util/calculate')
 
@@ -86,16 +88,27 @@ const countInputs = (input, csv) => csv.map(tweet => tweet.Tweet_Text)
 const mostExclaimTweet = csv =>
   csv.map(csv => csv.Tweet_Text)[countInputs('!', csv).reduce((acc, cur, index, arr) => cur > arr[acc] ? index : acc, 0)]
 
+// Find the spelling errors done in each tweet
+const spellingErrors = csv =>
+  csv.map(csv => csv.Tweet_Text)
+    .map(tweet =>
+      tweet.split(' '))
+    .map(tweet => tweet.filter(content => !content.includes('http')))
+    .map(tweet => tweet.filter(content => content.match(/\d/) === null))
+    .map(tweet => tweet.join())
+    .map(tweet => spell.check(tweet))
+
 const readCSV = async () => {
   const file = await fsReadFile(path.join(__dirname, INPUTFILENAME))
   csvParse(file)
   //  .then(csv => tweetAvgLength(csv))
   //  .then(csv => shortestTweet(csv))
   //  .then(csv => dateOfWeek(csv))
-    .then(csv => timeOfDay(csv))
+  //  .then(csv => timeOfDay(csv))
   //  .then(csv => mentions('Clinton', csv))
   //  .then(csv => countInputs('!', csv))
   //  .then(csv => mostExclaimTweet(csv))
+    .then(csv => spellingErrors(csv))
     .then(x => console.log(x))
 }
 

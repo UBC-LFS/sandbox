@@ -1,12 +1,5 @@
-const fruits = ['Wed', 'Wed', 'Tues', 'Tues', 'Tues']
+const spell = require('spell-checker-js')
+spell.load('en')
 
-var countedNames = fruits.reduce((allNames, name) => {
-  if (name in allNames) {
-    allNames[name]++
-  } else {
-    allNames[name] = 1
-  }
-  return allNames
-}, [])
-
-console.log(countedNames)
+const check = spell.check('Hello, hillo, hollo, holo, hello, dsiofahogahwo')
+console.log(check)
