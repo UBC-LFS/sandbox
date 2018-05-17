@@ -36,8 +36,26 @@ const dateOfWeek = csv =>
       return acc
     })
 
-const timeOfDay = csv => {
-}
+// Give hour of day that he tweets the most (standard 24 hours clock)
+const timeOfDay = csv =>
+  csv.map(tweet => tweet.Time)
+    .map(time => moment(time, 'kk:mm:ss').format('kk'))
+    .reduce((acc, cur) => {
+      const index = acc.findIndex(time => time.time === cur)
+      if (index > -1) {
+        acc[index].count++
+      } else {
+        acc.push({
+          time: cur,
+          count: 1
+        })
+      }
+      return acc
+    }, [])
+    .reduce((acc, cur) => {
+      if (acc.count < cur.count) acc = cur
+      return acc
+    })
 
 // Gives the average tweet length
 const tweetAvgLength = csv =>
@@ -73,7 +91,8 @@ const readCSV = async () => {
   csvParse(file)
   //  .then(csv => tweetAvgLength(csv))
   //  .then(csv => shortestTweet(csv))
-    .then(csv => dateOfWeek(csv))
+  //  .then(csv => dateOfWeek(csv))
+    .then(csv => timeOfDay(csv))
   //  .then(csv => mentions('Clinton', csv))
   //  .then(csv => countInputs('!', csv))
   //  .then(csv => mostExclaimTweet(csv))
